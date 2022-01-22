@@ -1,16 +1,10 @@
+using Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace PublisherA.Controllers
 {
-    public class RegisterViewModel
-    {
-        public string Username { get; set; }
-
-        public string Password { get; set; }
-    }
-
     [ApiController]
     [Route("[controller]")]
     public class AuthController : ControllerBase

@@ -1,3 +1,4 @@
+using Consumer.Consumers;
 using Consumer.Services;
 using MassTransit;
 
@@ -16,7 +17,7 @@ builder.Services.AddMassTransit(busConfigurator =>
     busConfigurator.AddConsumer<RegisterConsumer>();
     busConfigurator.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
     {
-        cfg.ReceiveEndpoint("endpointname", receieEndpointConfigurator =>
+        cfg.ReceiveEndpoint("register-consumer", receieEndpointConfigurator =>
         {
             receieEndpointConfigurator.ConfigureConsumer<RegisterConsumer>(provider);
         });
