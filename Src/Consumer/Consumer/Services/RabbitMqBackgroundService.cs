@@ -1,7 +1,8 @@
 ﻿using MassTransit;
+using PublisherA.Controllers;
 using System.Text.Json;
 
-namespace Consumer.Services
+namespace PublisherA.Controllers
 {
     public class RegisterViewModel
     {
@@ -9,7 +10,11 @@ namespace Consumer.Services
 
         public string Password { get; set; }
     }
+}
 
+
+namespace Consumer.Services
+{
     public class RegisterConsumer : IConsumer<RegisterViewModel>
     {
         private readonly ILogger<RegisterConsumer> _logger;
