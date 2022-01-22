@@ -1,4 +1,5 @@
 using MassTransit;
+using PublisherB.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,18 @@ builder.Services.AddSwaggerGen();
 //MassTransit
 builder.Services.AddMassTransit(busConfigurator =>
 {
-    busConfigurator.AddBus(provider => Bus.Factory.CreateUsingRabbitMq());
+    busConfigurator.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+    {
+        //cfg.Message<RegisterViewModel>(x =>
+        //{
+        //    x.SetEntityName("PublisherA.Controllers:RegisterViewModel");
+        //});
+
+        //cfg.Publish<RegisterViewModel>(x =>
+        //{
+        //    x.BindAlternateExchangeQueue("PublisherA.Controllers:RegisterViewModel", "endpointname");
+        //});
+    }));
 });
 
 var app = builder.Build();
