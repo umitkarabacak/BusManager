@@ -14,7 +14,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.AddConsumer<RegisterConsumer>();
-    busConfigurator.AddBus(provider => Bus.Factory.CreateUsingRabbitMq());
+    busConfigurator.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+    {
+        cfg.ReceiveEndpoint("endpointname", receieEndpointConfigurator =>
+        {
+            receieEndpointConfigurator.ConfigureConsumer<RegisterConsumer>(provider);
+        });
+    }));
 });
 
 // Hosted services
